@@ -66,11 +66,23 @@ const serveRefrigerators = async (peopleWithBeer) => {
       } else {
         const bottlesToAdd =  capacity.bottles - refrigerator.content.bottles;
         const cansToAdd = capacity.cans - refrigerator.content.cans;
-        console.log(bottlesToAdd, cansToAdd)
+        
+        const availableBottles = peopleWithBeer.bottles - bottlesToAdd;
+        const availableCans = peopleWithBeer.cans - cansToAdd;
+
+        if(Math.sign(availableBottles) !== -1 && Math.sign(availableCans) !== -1){
+          refrigerator.content.bottles = availableBottles;
+          refrigerator.content.cans = availableCans;
+          peopleWithBeer.bottles = availableBottles;
+          peopleWithBeer.cans = availableCans;
+        } else {
+          peopleWithBeer.bottles = 0;
+          peopleWithBeer.cans = 0;
+        }
+
         return refrigerator
       }
     })
-    console.log(refrigerators)
     self.occupied = false;
   } else {
     refrigerators = await refrigerators.map(refrigerator => {
@@ -79,11 +91,23 @@ const serveRefrigerators = async (peopleWithBeer) => {
       } else {
         const bottlesToAdd =  capacity.bottles - refrigerator.content.bottles;
         const cansToAdd = capacity.cans - refrigerator.content.cans;
-        console.log(bottlesToAdd, cansToAdd)
+        
+        const availableBottles = peopleWithBeer.bottles - bottlesToAdd;
+        const availableCans = peopleWithBeer.cans - cansToAdd;
+
+        if(Math.sign(availableBottles) !== -1 && Math.sign(availableCans) !== -1){
+          refrigerator.content.bottles = availableBottles;
+          refrigerator.content.cans = availableCans;
+          peopleWithBeer.bottles = availableBottles;
+          peopleWithBeer.cans = availableCans;
+        } else {
+          peopleWithBeer.bottles = 0;
+          peopleWithBeer.cans = 0;
+        }
+
         return refrigerator
       }
     })
-    console.log(refrigerators)
     friends.push(peopleWithBeer.name)
   }
 }
